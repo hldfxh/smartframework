@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public final class IocHelper {
 
-    static {
+    /*static {
         Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
         if (CollectionUtil.isNotEmpty(beanMap)) {
             for (Map.Entry<Class<?>, Object> beanEntry : beanMap.entrySet()) {
@@ -34,6 +34,6 @@ public final class IocHelper {
 
             }
         }
-    }
+    }*/
 
 }

@@ -8,5 +8,6 @@ import java.util.Map;
  */
 public class CollectionUtil {
     public static boolean isNotEmpty(Collection collection) {
+        return false;
     }
 }

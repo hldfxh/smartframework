@@ -5,5 +5,6 @@ package com.hldfxh.smartframework.helper;
  */
 public final class ConfigHelper {
     public static String getAppBasePackage() {
+        return null;
     }
 }

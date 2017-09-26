@@ -4,6 +4,7 @@ import com.hldfxh.smartframework.annotation.Action;
 import com.hldfxh.smartframework.bean.Handler;
 import com.hldfxh.smartframework.bean.Request;
 import com.hldfxh.smartframework.utils.CollectionUtil;
+import com.sun.deploy.util.ArrayUtil;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -22,10 +23,23 @@ public final class ControllerHelper {
         if (CollectionUtil.isNotEmpty(controllerClassSet)) {
             for (Class<?> cls : controllerClassSet) {
                 Method[] methods = cls.getDeclaredMethods();
-                //判空
-                for (Method method : methods) {
-                    if (method.isAnnotationPresent(Action.class)) {
-                        method.getAnnotation(Action.class);
+                if (ArrayUtil.isNotEmpty(methods)) {
+                    for (Method method : methods) {
+                        if (method.isAnnotationPresent(Action.class)) {
+                            Action annotation = method.getAnnotation(Action.class);
+                            String mapping = annotation.value();
+                            //@Action("post:/customer_create")
+                            if (mapping.matches("\\w+:/\\w*")) {
+                                String[] array = mapping.split(":");
+                                if (ArrayUtil.isNotEmpty(array) && array.length == 2) {
+                                    String requestMethod = array[0];
+                                    String requestPath = array[1];
+                                    Request request = new Request(requestMethod,requestPath);
+                                    Handler handler = new Handler(cls,method);
+                                    ACTION_MAP.put(request,handler);
+                                }
+                            }
+                        }
                     }
                 }
             }

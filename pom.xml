@@ -85,6 +85,12 @@
         </dependency>
     </dependencies>
 
+    <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+    <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>3.2.1</version>
+    </dependency>
 
     <!-- 自动将jar包、源码包部署到http://maven.z.nuomi.com/nexus/index.html -->
     <distributionManagement>
